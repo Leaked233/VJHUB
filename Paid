@@ -1,0 +1,26 @@
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/Nx6aD9aM"))()
+local window = library:new({textsize = 13.5,font = Enum.Font.RobotoMono,name = "VJ HUB(PAID)",color = Color3.fromRGB(225,58,81)})
+local tab = window:page({name = "MAGS"})
+local section1 = tab:section({name = "🏈",side = "left",size = 250})
+section1:button({name = "button",callback = function()
+    local plr = game.Players.LocalPlayer
+    local rs = game:GetService("RunService")
+    function magBall(ball)
+        if ball and plr.Character then
+            local leftArm = plr.Character:FindFirstChild("Left Arm")
+            if leftArm then
+                firetouchinterest(leftArm, ball, 0)
+                task.wait()
+                firetouchinterest(leftArm, ball, 1)
+            end
+        end
+    end
+    rs.Heartbeat:Connect(function()
+        local footballs = workspace:FindPartsInRegion3(Region3.new(plr.Character.HumanoidRootPart.Position - Vector3.new(50, 50, 50), plr.Character.HumanoidRootPart.Position + Vector3.new(50, 50, 50)), nil, math.huge)
+        for _, football in ipairs(footballs) do
+            if football.Name == "Football" and football:IsA("BasePart") and (football.Position - plr.Character.HumanoidRootPart.Position).Magnitude < 50 then
+                magBall(football)
+            end
+        end
+    end)
+end)
